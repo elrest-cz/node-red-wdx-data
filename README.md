@@ -1,4 +1,4 @@
-# Node Red - WDX - Data 
+# Wago - Node Red - WDX - Data 
 
 Node Red plugin WDX Data palette with nodes implementing WDX WS Data Interface communication within Node Red application.
 
