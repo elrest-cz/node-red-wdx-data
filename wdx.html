@@ -13,32 +13,6 @@
 
 <script type="text/javascript">
 
-	RED.nodes.registerType('edesign.runtime.web-socket', {
-		category: 'config',
-		defaults: {
-			url: {
-				value: '',
-				required: true,
-				label: 'Server',
-				validate: RED.validators.regex(/^((?!\/debug\/ws).)*$/)
-			}
-		},
-		inputs: 0,
-		outputs: 0,
-		label: function () {
-			return this.url;
-		},
-
-		oneditprepare: function () {
-
-		},
-		oneditsave: function () {
-		}
-	});
-
-	/**
-	 * Common
-	 */
 	function startNode(node, customMsg) {
 		$.ajax({
 			url: "inject/" + node.id,
@@ -62,9 +36,6 @@
 		});
 	}
 
-	/**
-	 * Data
-	 */
 	function DataPathTreeSelector(element) {
 		this.element = $(element);
 
@@ -431,13 +402,13 @@
 		return self;
 	};
 
-	RED.nodes.registerType('edesign.runtime.data.get-schema', {
+	RED.nodes.registerType('wago.wdx.data.get-schema', {
 		category: 'WDX Data',
 		color: '#FFFFFF',
 		defaults: {
 			name: { value: "" },
 			client: {
-				type: "edesign.runtime.web-socket",
+				type: "wago.wdx.web-socket",
 				required: true
 			},
 			path: {
@@ -466,13 +437,13 @@
 		}
 	});
 
-	RED.nodes.registerType('edesign.runtime.data.set-schema', {
+	RED.nodes.registerType('wago.wdx.data.set-schema', {
 		category: 'WDX Data',
 		color: '#FFFFFF',
 		defaults: {
 			name: { value: "" },
 			client: {
-				type: "edesign.runtime.web-socket",
+				type: "wago.wdx.web-socket",
 				required: true
 			},
 			path: {
@@ -494,13 +465,13 @@
 		},
 	});
 
-	RED.nodes.registerType('edesign.runtime.data.get-value', {
+	RED.nodes.registerType('wago.wdx.data.get-value', {
 		category: 'WDX Data',
 		color: '#FFFFFF',
 		defaults: {
 			name: { value: "" },
 			client: {
-				type: "edesign.runtime.web-socket",
+				type: "wago.wdx.web-socket",
 				required: true
 			},
 			path: {
@@ -520,13 +491,13 @@
 		},
 	});
 
-	RED.nodes.registerType('edesign.runtime.data.set-value', {
+	RED.nodes.registerType('wago.wdx.data.set-value', {
 		category: 'WDX Data',
 		color: '#FFFFFF',
 		defaults: {
 			name: { value: "" },
 			client: {
-				type: "edesign.runtime.web-socket",
+				type: "wago.wdx.web-socket",
 				required: true
 			},
 			path: {
@@ -549,13 +520,13 @@
 		},
 	});
 
-	RED.nodes.registerType('edesign.runtime.data.monitor-value', {
+	RED.nodes.registerType('wago.wdx.data.monitor-value', {
 		category: 'WDX Data',
 		color: '#FFFFFF',
 		defaults: {
 			name: { value: "" },
 			client: {
-				type: "edesign.runtime.web-socket",
+				type: "wago.wdx.web-socket",
 				required: true
 			},
 			path: {
@@ -578,13 +549,13 @@
 		},
 	});
 
-	RED.nodes.registerType('edesign.runtime.data.monitor-schema', {
+	RED.nodes.registerType('wago.wdx.data.monitor-schema', {
 		category: 'WDX Data',
 		color: '#FFFFFF',
 		defaults: {
 			name: { value: "" },
 			client: {
-				type: "edesign.runtime.web-socket",
+				type: "wago.wdx.web-socket",
 				required: true
 			},
 			subscribe: {
@@ -609,19 +580,7 @@
 
 </script>
 
-<script type="text/html" data-template-name="edesign.runtime.web-socket">
-
-	<div class="form-row">
-		<label for="node-config-input-url">
-			<i class="fa fa-bookmark"></i>
-			<span>Url</span>
-		</label>
-		<input id="node-config-input-url" type="text" placeholder="ws://localhost:8081">
-	</div>
-
-</script>
-
-<script type="text/html" data-template-name="edesign.runtime.data.get-schema">
+<script type="text/html" data-template-name="wago.wdx.data.get-schema">
 
 	<div class="form-row">
 
@@ -653,13 +612,14 @@
 
 </script>
 
-<script type="text/html" data-help-name="edesign.runtime.data.get-schema">
-	<h2>eDesign Runtime - Data - Get Schema</h2>
-	<p>Retrieves data schema</p>
+<script type="text/html" data-help-name="wago.wdx.data.get-schema">
+	<h2>WAGO - WDX - Data - Get Schema</h2>
+	<p>Retrieves data schema from WDX</p>
 	<h2>Parameters</h2>
+
 </script>
 
-<script type="text/html" data-template-name="edesign.runtime.data.set-schema">
+<script type="text/html" data-template-name="wago.wdx.data.set-schema">
 
 	<div class="form-row">
 
@@ -679,7 +639,13 @@
 
 </script>
 
-<script type="text/html" data-template-name="edesign.runtime.data.get-value">
+<script type="text/html" data-help-name="wago.wdx.data.set-schema">
+	<h2>WAGO - WDX - Data - Set Schema</h2>
+	<p>Sets data schema in WDX</p>
+	<h2>Parameters</h2>
+</script>
+
+<script type="text/html" data-template-name="wago.wdx.data.get-value">
 
 	<div class="form-row">
 
@@ -698,7 +664,13 @@
 
 </script>
 
-<script type="text/html" data-template-name="edesign.runtime.data.set-value">
+<script type="text/html" data-help-name="wago.wdx.data.get-value">
+	<h2>WAGO - WDX - Data - Get Value</h2>
+	<p>Gets data value from WDX</p>
+	<h2>Parameters</h2>
+</script>
+
+<script type="text/html" data-template-name="wago.wdx.data.set-value">
 
 	<div class="form-row">
 
@@ -721,7 +693,13 @@
 
 </script>
 
-<script type="text/html" data-template-name="edesign.runtime.data.monitor-value">
+<script type="text/html" data-help-name="wago.wdx.data.set-value">
+	<h2>WAGO - WDX - Data - Set Value</h2>
+	<p>Sets data value in WDX</p>
+	<h2>Parameters</h2>
+</script>
+
+<script type="text/html" data-template-name="wago.wdx.data.monitor-value">
 
 	<div class="form-row">
 
@@ -745,7 +723,14 @@
 
 </script>
 
-<script type="text/html" data-template-name="edesign.runtime.data.monitor-schema">
+
+<script type="text/html" data-help-name="wago.wdx.data.monitor-value">
+	<h2>WAGO - WDX - Data - Monitor Value</h2>
+	<p>Subscribe/Unsubscribe to WDX data value changes</p>
+	<h2>Parameters</h2>
+</script>
+
+<script type="text/html" data-template-name="wago.wdx.data.monitor-schema">
 
 	<div class="form-row">
 
@@ -762,4 +747,10 @@
 		<input type="checkbox" id="node-input-subscribe" placeholder="">
 	</div>
 
+</script>
+
+<script type="text/html" data-help-name="wago.wdx.data.monitor-schema">
+	<h2>WAGO - WDX - Data - Monitor Schema</h2>
+	<p>Subscribe/Unsubscribe to WDX data value</p>
+	<h2>Parameters</h2>
 </script>
