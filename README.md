@@ -1,4 +1,4 @@
-# Node Red - WDX - Data 
+# Wago - Node Red - WDX - Data 
 
 Node Red plugin WDX Data palette with nodes implementing WDX WS Data Interface communication within Node Red application.
 
@@ -16,8 +16,6 @@ Node Red plugin WDX Data palette with nodes implementing WDX WS Data Interface c
 ## Requirements
 + WDX Runtime - Docker or local WDX runtime installation.
 + Node-RED editor.
-+ Node-RED WDX Pallete.
-
 
 ## Installation
 
@@ -25,7 +23,6 @@ Node Red plugin WDX Data palette with nodes implementing WDX WS Data Interface c
 ### Node RED Palette Management Installation
 
 Open your Node-RED installation UI palette management and search for package @wago/node-red-wdx-palette.
-
 
 ![image info](./assets/images/palatte-management.png)
 
@@ -41,13 +38,13 @@ cd ~/.node-red/data # Directory would differ based on your Node-RED installation
 Install the library, using npm or yarn:
 
 ```bash
-npm install @wago/node-red-wdx-datas
+npm install @wago/node-red-wdx-data
 ```
 
 or
 
 ```bash
-yarn add @wago/node-red-wdx-datas
+yarn add @wago/node-red-wdx-data
 ```
 
 
