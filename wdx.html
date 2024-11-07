@@ -1214,6 +1214,7 @@
 </script>
 
 <script type="text/html" data-help-name="wago.wdx.data.monitor-schema">
+
 	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
 
 	<h2>WAGO - WDX - Data - Monitor Schema</h2>
@@ -1235,7 +1236,7 @@
 
 	<dl class="message-properties">
 		<dt>subscribe<span class="property-type">boolean</span></dt>
-		<dd>WDX - Data - Schema - Monitor Schema Subscribe/Unsubscribe</dd>
+		<dd>WDX - Data - Schema - Monitor Subscribe/Unsubscribe</dd>
 	</dl>
 
 	<h3>Configuration Options</h3>
@@ -1256,7 +1257,7 @@
 
 	<ul>
 		<li><b>Update:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
-		<li><b>Complete:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Complete:</b> Success response for this node. Output is flow message with emty payload.</li>
 		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
 	</ul>
 
@@ -1264,9 +1265,9 @@
 
 	<ul>
 		<li>
-			<b>Example WDX - DATA - Get schema node flow</b>
+			<b>Example WDX - DATA - Monitor schema node flow</b>
 			<p>
-				 Will retrieve root schema from WDX - Data to 2 level of the childrens.
+				 Will retrieve updates of WDX - Data - Schema from WDX.
 			</p>
 		
 			<h4><b>Example Figure.</b></h4>
@@ -1307,4 +1308,5 @@
 		<li><b>Licence:</b> MIT</li>
 		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
 	</ul>
+
 </script>
