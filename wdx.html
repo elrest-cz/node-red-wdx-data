@@ -538,7 +538,7 @@
 		},
 		inputs: 1,
 		outputs: 3,
-		outputLabels: ["Success", "Error", "Completed"],
+		outputLabels: ["Update", "Error", "Completed"],
 		icon: "WagoLogo.svg",
 		paletteLabel: "Monitor - Value",
 		label: "WDX Data - Monitor - Value",
@@ -567,7 +567,7 @@
 		},
 		inputs: 1,
 		outputs: 3,
-		outputLabels: ["Success", "Error", "Completed"],
+		outputLabels: ["Update", "Error", "Completed"],
 		icon: "WagoLogo.svg",
 		paletteLabel: " Monitor - Schema",
 		label: "WDX Data - Monitor - Schema",
@@ -613,9 +613,102 @@
 </script>
 
 <script type="text/html" data-help-name="wago.wdx.data.get-schema">
+	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
+
 	<h2>WAGO - WDX - Data - Get Schema</h2>
-	<p>Retrieves data schema from WDX</p>
-	<h2>Parameters</h2>
+
+	<h3>Overview</h3>
+
+	<p>
+		<b>Node Name:</b> WDX - Data - Get Schema <br />
+		<b>Description:</b> Retrieves the schema from the WDX - Data on given path for given level of the schema.
+	</p>
+
+	<h3>Installation</h3>
+	<p>
+	<pre>npm install @wago/node-red-wdx-data</pre>
+	</p>
+
+
+	<h3>Inputs</h3>
+
+	<dl class="message-properties">
+		<dt>path<span class="property-type">string</span></dt>
+		<dd>WDX - Data - Schema - Browse Path</dd>
+		<dt class="optional">level<span class="property-type">number</span></dt>
+		<dd>WDX - Data - Schema - Browse Level</dd>
+	</dl>
+
+	<h3>Configuration Options</h3>
+
+	<ul>
+		<li>
+			<b>Properties:</b>		
+			<dl class="message-properties">
+				<dt>client<span class="property-type">wago.wdx.web-socket</span></dt>
+				<dd>WAGO - WDX - Web Socket Client</dd>
+				<dt>path<span class="property-type">string</span></dt>
+				<dd>WDX - Data - Schema - Browse Path</dd>
+				<dt class="optional">level<span class="property-type">number</span></dt>
+				<dd>WDX - Data - Schema - Browse Level</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<h3>Outputs</h3>
+
+	<ul>
+		<li><b>Success:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
+	</ul>
+
+	<h3>Usage Examples</h3>
+
+	<ul>
+		<li>
+			<b>Example WDX - DATA - Get schema node flow</b>
+			<p>
+				 Will retrieve root schema from WDX - Data to 2 level of the childrens.
+			</p>
+		
+			<h4><b>Example Figure.</b></h4>
+		
+			<img src="icons/@wago/node-red-wdx-data/wdx-data-get-schema.png" />
+		
+			<h4><b>Example flow code.</b></h4>
+		
+			<pre>[{"id":"dd043ba45307c8bc","type":"group","z":"68d54b1d6b382a77","name":"WDX Example - Data -  Get Schema","style":{"label":true},"nodes":["749358639911e684","1a2113791069c228","1dd1dd096cc44b04","daf06cd4401541d9"],"x":34,"y":939,"w":1132,"h":162},{"id":"749358639911e684","type":"debug","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"Success","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1060,"y":980,"wires":[]},{"id":"1a2113791069c228","type":"inject","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"WDX Example - Data Get Schema Request","props":[{"p":"path","v":"Virtual.virtual-store.test","vt":"str"},{"p":"level","v":"1","vt":"num"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":250,"y":1020,"wires":[["daf06cd4401541d9"]]},{"id":"1dd1dd096cc44b04","type":"debug","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"Error","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1050,"y":1060,"wires":[],"info":"Error output"},{"id":"daf06cd4401541d9","type":"wago.wdx.data.get-schema","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"","client":"3949037aa7f8a94a","path":"","level":1,"x":650,"y":1020,"wires":[["749358639911e684"],["1dd1dd096cc44b04"]]},{"id":"3949037aa7f8a94a","type":"wago.wdx.web-socket","url":"ws://localhost:82"}]</pre>
+		
+		</li>
+	</ul>
+
+	<h3>Error Handling</h3>
+
+	<dl class="message-properties">
+		<dt>401</dt>
+		<dd>Wrong request</dd>
+		<dt>401</dt>
+		<dd>Unauthorized</dd>
+		<dt>404</dt>
+		<dd>Not Found</dd>
+		<dt>500</dt>
+		<dd>Unexpected server error</dd>
+	</dl>
+
+	<h3>Additional Resources</h3>
+
+	<ul>
+		<li><b>Github:</b> <a href="https://github.com/elrest-cz/node-red-wdx-data">https://github.com/elrest-cz/node-red-wdx-data</a></li>
+		<li><b>NPMJS:</b> <a href="https://www.npmjs.com/package/@wago/node-red-wdx-data">https://www.npmjs.com/package/@wago/node-red-wdx-data</a></li>
+		<li><b>Support:</b> info@elrest.cz</li>
+	</ul>
+
+	<h3>Licence</h3>
+
+	<ul>
+		<li><b>Licence:</b> MIT</li>
+		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
+	</ul>
 
 </script>
 
@@ -631,7 +724,6 @@
 		<input type="text" id="node-input-client">
 	</div>
 
-
 	<div class="form-row">
 		<label for="node-input-schema"><i class="fa fa-tag"></i>Schema</label>
 		<input type="text" id="node-input-schema" placeholder="Schema JSON">
@@ -640,9 +732,100 @@
 </script>
 
 <script type="text/html" data-help-name="wago.wdx.data.set-schema">
+	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
+
 	<h2>WAGO - WDX - Data - Set Schema</h2>
-	<p>Sets data schema in WDX</p>
-	<h2>Parameters</h2>
+
+	<h3>Overview</h3>
+
+	<p>
+		<b>Node Name:</b> WDX - Data - Set Schema <br />
+		<b>Description:</b> Sets WDX - Data - Schema in WDX.
+	</p>
+
+	<h3>Installation</h3>
+	<p>
+	<pre>npm install @wago/node-red-wdx-data</pre>
+	</p>
+
+
+	<h3>Inputs</h3>
+
+	<dl class="message-properties">
+		<dt>schema<span class="property-type">json</span></dt>
+		<dd><a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema</a> json model.</dd>
+	</dl>
+
+	<h3>Configuration Options</h3>
+
+	<ul>
+		<li>
+			<b>Properties:</b>		
+			<dl class="message-properties">
+				<dt>client<span class="property-type">wago.wdx.web-socket</span></dt>
+				<dd>WAGO - WDX - Web Socket Client</dd>
+				<dt>schema<span class="property-type">json</span></dt>
+				<dd>WDX - Data - Schema</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<h3>Outputs</h3>
+
+	<ul>
+		<li><b>Success:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
+	</ul>
+
+	<h3>Usage Examples</h3>
+
+	<ul>
+		<li>
+			<b>Example WDX - DATA - Set schema node flow</b>
+
+			<p>
+				 Will store WDX - Data - schema in WDX.
+			</p>
+		
+			<h4><b>Example Figure.</b></h4>
+		
+			<img src="icons/@wago/node-red-wdx-data/wdx-data-set-schema.png" />
+		
+			<h4><b>Example flow code.</b></h4>
+		
+			<pre>[{"id":"483cdaf6d9c84b2a","type":"group","z":"68d54b1d6b382a77","name":"WDX Example - Data - Set Schema","style":{"label":true},"nodes":["88631c8b6f438b3d","9c029746518c2d21","af1e6d1fe3882882","23d0bd78cc9b08c8"],"x":34,"y":659,"w":1132,"h":162},{"id":"88631c8b6f438b3d","type":"debug","z":"68d54b1d6b382a77","g":"483cdaf6d9c84b2a","name":"Success","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":1060,"y":700,"wires":[]},{"id":"9c029746518c2d21","type":"inject","z":"68d54b1d6b382a77","g":"483cdaf6d9c84b2a","name":"WDX Example - Data Set Schema Request","props":[{"p":"schema","v":"{\"path\":\"Virtual.virtual-store.test\",\"relativePath\":\"test\",\"name\":\"test\",\"metadata\":{\"type\":\"virtual\"},\"readonly\":false,\"subscribeable\":true,\"editable\":true,\"extendable\":false,\"removable\":true,\"refreshable\":false,\"uuid\":\"1374e202-0885-4093-bd8b-bebbae8726ff\"}","vt":"json"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":240,"y":740,"wires":[["23d0bd78cc9b08c8"]]},{"id":"af1e6d1fe3882882","type":"debug","z":"68d54b1d6b382a77","g":"483cdaf6d9c84b2a","name":"Error","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":1050,"y":780,"wires":[],"info":"Error output"},{"id":"23d0bd78cc9b08c8","type":"wago.wdx.data.set-schema","z":"68d54b1d6b382a77","g":"483cdaf6d9c84b2a","name":"","client":"3949037aa7f8a94a","path":"","schema":"","x":650,"y":740,"wires":[["88631c8b6f438b3d"],["af1e6d1fe3882882"]]},{"id":"3949037aa7f8a94a","type":"wago.wdx.web-socket","url":"ws://localhost:82"}]</pre>
+		
+		</li>
+	</ul>
+
+	<h3>Error Handling</h3>
+
+	<dl class="message-properties">
+		<dt>401</dt>
+		<dd>Wrong request</dd>
+		<dt>401</dt>
+		<dd>Unauthorized</dd>
+		<dt>404</dt>
+		<dd>Not Found</dd>
+		<dt>500</dt>
+		<dd>Unexpected server error</dd>
+	</dl>
+
+	<h3>Additional Resources</h3>
+
+	<ul>
+		<li><b>Github:</b> <a href="https://github.com/elrest-cz/node-red-wdx-data">https://github.com/elrest-cz/node-red-wdx-data</a></li>
+		<li><b>NPMJS:</b> <a href="https://www.npmjs.com/package/@wago/node-red-wdx-data">https://www.npmjs.com/package/@wago/node-red-wdx-data</a></li>
+		<li><b>Support:</b> info@elrest.cz</li>
+	</ul>
+
+	<h3>Licence</h3>
+
+	<ul>
+		<li><b>Licence:</b> MIT</li>
+		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
+	</ul>
+
 </script>
 
 <script type="text/html" data-template-name="wago.wdx.data.get-value">
@@ -665,9 +848,101 @@
 </script>
 
 <script type="text/html" data-help-name="wago.wdx.data.get-value">
+
+	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
+
 	<h2>WAGO - WDX - Data - Get Value</h2>
-	<p>Gets data value from WDX</p>
-	<h2>Parameters</h2>
+
+	<h3>Overview</h3>
+
+	<p>
+		<b>Node Name:</b> WDX - Data - Get Value <br />
+		<b>Description:</b> Retrieves WDX - Data - Value from WDX for given shcema path.
+	</p>
+
+	<h3>Installation</h3>
+
+	<p>
+	<pre>npm install @wago/node-red-wdx-data</pre>
+	</p>
+
+
+	<h3>Inputs</h3>
+
+	<dl class="message-properties">
+		<dt>path<span class="property-type">string</span></dt>
+		<dd>WDX - Data - Schema - Path</dd>
+	</dl>
+
+	<h3>Configuration Options</h3>
+
+	<ul>
+		<li>
+			<b>Properties:</b>		
+			<dl class="message-properties">
+				<dt>client<span class="property-type">wago.wdx.web-socket</span></dt>
+				<dd>WAGO - WDX - Web Socket Client</dd>
+				<dt>path<span class="property-type">string</span></dt>
+				<dd>WDX - Data - Schema - Path</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<h3>Outputs</h3>
+
+	<ul>
+		<li><b>Success:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataValue.md">WDX - Data Value model</a>.</li>
+		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
+	</ul>
+
+	<h3>Usage Examples</h3>
+
+	<ul>
+		<li>
+			<b>Example WDX - DATA - Get Value node flow</b>
+			<p>
+				 Will retrieve root schema from WDX - Data to 2 level of the childrens.
+			</p>
+		
+			<h4><b>Example Figure.</b></h4>
+		
+			<img src="icons/@wago/node-red-wdx-data/wdx-data-get-schema.png" />
+		
+			<h4><b>Example flow code.</b></h4>
+		
+			<pre>[{"id":"dd043ba45307c8bc","type":"group","z":"68d54b1d6b382a77","name":"WDX Example - Data -  Get Schema","style":{"label":true},"nodes":["749358639911e684","1a2113791069c228","1dd1dd096cc44b04","daf06cd4401541d9"],"x":34,"y":939,"w":1132,"h":162},{"id":"749358639911e684","type":"debug","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"Success","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1060,"y":980,"wires":[]},{"id":"1a2113791069c228","type":"inject","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"WDX Example - Data Get Schema Request","props":[{"p":"path","v":"Virtual.virtual-store.test","vt":"str"},{"p":"level","v":"1","vt":"num"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":250,"y":1020,"wires":[["daf06cd4401541d9"]]},{"id":"1dd1dd096cc44b04","type":"debug","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"Error","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1050,"y":1060,"wires":[],"info":"Error output"},{"id":"daf06cd4401541d9","type":"wago.wdx.data.get-schema","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"","client":"3949037aa7f8a94a","path":"","level":1,"x":650,"y":1020,"wires":[["749358639911e684"],["1dd1dd096cc44b04"]]},{"id":"3949037aa7f8a94a","type":"wago.wdx.web-socket","url":"ws://localhost:82"}]</pre>
+		
+		</li>
+	</ul>
+
+	<h3>Error Handling</h3>
+
+	<dl class="message-properties">
+		<dt>401</dt>
+		<dd>Wrong request</dd>
+		<dt>401</dt>
+		<dd>Unauthorized</dd>
+		<dt>404</dt>
+		<dd>Not Found</dd>
+		<dt>500</dt>
+		<dd>Unexpected server error</dd>
+	</dl>
+
+	<h3>Additional Resources</h3>
+
+	<ul>
+		<li><b>Github:</b> <a href="https://github.com/elrest-cz/node-red-wdx-data">https://github.com/elrest-cz/node-red-wdx-data</a></li>
+		<li><b>NPMJS:</b> <a href="https://www.npmjs.com/package/@wago/node-red-wdx-data">https://www.npmjs.com/package/@wago/node-red-wdx-data</a></li>
+		<li><b>Support:</b> info@elrest.cz</li>
+	</ul>
+
+	<h3>Licence</h3>
+
+	<ul>
+		<li><b>Licence:</b> MIT</li>
+		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
+	</ul>
+
 </script>
 
 <script type="text/html" data-template-name="wago.wdx.data.set-value">
@@ -694,9 +969,104 @@
 </script>
 
 <script type="text/html" data-help-name="wago.wdx.data.set-value">
+	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
+
 	<h2>WAGO - WDX - Data - Set Value</h2>
-	<p>Sets data value in WDX</p>
-	<h2>Parameters</h2>
+
+	<h3>Overview</h3>
+
+	<p>
+		<b>Node Name:</b> WDX - Data - Set Value <br />
+		<b>Description:</b> Sets WDX - Data - Value in WDX.
+	</p>
+
+	<h3>Installation</h3>
+
+	<p>
+	<pre>npm install @wago/node-red-wdx-data</pre>
+	</p>
+
+
+	<h3>Inputs</h3>
+
+	<dl class="message-properties">
+		<dt>path<span class="property-type">string</span></dt>
+		<dd>WDX - Data - Schema - Value Path</dd>
+		<dt class="optional">value<span class="property-type">string</span></dt>
+		<dd>WDX - Data - Schema - Value Value</dd>
+	</dl>
+
+	<h3>Configuration Options</h3>
+
+	<ul>
+		<li>
+			<b>Properties:</b>		
+			<dl class="message-properties">
+				<dt>client<span class="property-type">wago.wdx.web-socket</span></dt>
+				<dd>WAGO - WDX - Web Socket Client</dd>
+				<dt>path<span class="property-type">string</span></dt>
+				<dd>WDX - Data - Schema - Value Path</dd>
+				<dt class="optional">value<span class="property-type">string</span></dt>
+				<dd>WDX - Data - Schema - Value Value</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<h3>Outputs</h3>
+
+	<ul>
+		<li><b>Success:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataValue.md">WDX - Data - Value model</a>.</li>
+		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
+	</ul>
+
+	<h3>Usage Examples</h3>
+
+	<ul>
+		<li>
+			<b>Example WDX - DATA - Set Value node flow</b>
+			<p>
+				 Will set WDX - Data -Value.
+			</p>
+		
+			<h4><b>Example Figure.</b></h4>
+		
+			<img src="icons/@wago/node-red-wdx-data/wdx-data-set-value.png" />
+		
+			<h4><b>Example flow code.</b></h4>
+		
+			<pre>[{"id":"dd043ba45307c8bc","type":"group","z":"68d54b1d6b382a77","name":"WDX Example - Data -  Get Schema","style":{"label":true},"nodes":["749358639911e684","1a2113791069c228","1dd1dd096cc44b04","daf06cd4401541d9"],"x":34,"y":939,"w":1132,"h":162},{"id":"749358639911e684","type":"debug","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"Success","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1060,"y":980,"wires":[]},{"id":"1a2113791069c228","type":"inject","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"WDX Example - Data Get Schema Request","props":[{"p":"path","v":"Virtual.virtual-store.test","vt":"str"},{"p":"level","v":"1","vt":"num"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":250,"y":1020,"wires":[["daf06cd4401541d9"]]},{"id":"1dd1dd096cc44b04","type":"debug","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"Error","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1050,"y":1060,"wires":[],"info":"Error output"},{"id":"daf06cd4401541d9","type":"wago.wdx.data.get-schema","z":"68d54b1d6b382a77","g":"dd043ba45307c8bc","name":"","client":"3949037aa7f8a94a","path":"","level":1,"x":650,"y":1020,"wires":[["749358639911e684"],["1dd1dd096cc44b04"]]},{"id":"3949037aa7f8a94a","type":"wago.wdx.web-socket","url":"ws://localhost:82"}]</pre>
+		
+		</li>
+	</ul>
+
+	<h3>Error Handling</h3>
+
+	<dl class="message-properties">
+		<dt>401</dt>
+		<dd>Wrong request</dd>
+		<dt>401</dt>
+		<dd>Unauthorized</dd>
+		<dt>404</dt>
+		<dd>Not Found</dd>
+		<dt>500</dt>
+		<dd>Unexpected server error</dd>
+	</dl>
+
+	<h3>Additional Resources</h3>
+
+	<ul>
+		<li><b>Github:</b> <a href="https://github.com/elrest-cz/node-red-wdx-data">https://github.com/elrest-cz/node-red-wdx-data</a></li>
+		<li><b>NPMJS:</b> <a href="https://www.npmjs.com/package/@wago/node-red-wdx-data">https://www.npmjs.com/package/@wago/node-red-wdx-data</a></li>
+		<li><b>Support:</b> info@elrest.cz</li>
+	</ul>
+
+	<h3>Licence</h3>
+
+	<ul>
+		<li><b>Licence:</b> MIT</li>
+		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
+	</ul>
+
 </script>
 
 <script type="text/html" data-template-name="wago.wdx.data.monitor-value">
@@ -723,11 +1093,105 @@
 
 </script>
 
-
 <script type="text/html" data-help-name="wago.wdx.data.monitor-value">
+	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
+
 	<h2>WAGO - WDX - Data - Monitor Value</h2>
-	<p>Subscribe/Unsubscribe to WDX data value changes</p>
-	<h2>Parameters</h2>
+
+	<h3>Overview</h3>
+
+	<p>
+		<b>Node Name:</b> WDX - Data - Monitor Value <br />
+		<b>Description:</b> Retrieves the schema from the WDX - Data on given path for given level of the schema.
+	</p>
+
+	<h3>Installation</h3>
+
+	<p>
+	<pre>npm install @wago/node-red-wdx-data</pre>
+	</p>
+
+
+	<h3>Inputs</h3>
+
+	<dl class="message-properties">
+		<dt>subscribe<span class="property-type">boolean</span></dt>
+		<dd>WDX - Data - Schema - Monitor Schema Subscribe/Unsubscribe</dd>
+		<dt>path<span class="property-type">string</span></dt>
+		<dd>WDX - Data - Schema - Browse Path</dd>
+	</dl>
+
+	<h3>Configuration Options</h3>
+
+	<ul>
+		<li>
+			<b>Properties:</b>		
+			<dl class="message-properties">
+				<dt>client<span class="property-type">wago.wdx.web-socket</span></dt>
+				<dd>WAGO - WDX - Web Socket Client</dd>
+				<dt>subscribe<span class="property-type">boolean</span></dt>
+				<dd>WDX - Data - Schema - Monitor Schema Subscribe/Unsubscribe</dd>
+				<dt>path<span class="property-type">string</span></dt>
+				<dd>WDX - Data - Schema - Browse Path</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<h3>Outputs</h3>
+
+	<ul>
+		<li><b>Update:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Complete:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
+	</ul>
+
+	<h3>Usage Examples</h3>
+
+	<ul>
+		<li>
+			<b>Example WDX - DATA - Monitor value node flow</b>
+			<p>
+				 Will retrieve root schema from WDX - Data to 2 level of the childrens.
+			</p>
+		
+			<h4><b>Example Figure.</b></h4>
+		
+			<img src="icons/@wago/node-red-wdx-data/wdx-data-monitor-value.png" />
+		
+			<h4><b>Example flow code.</b></h4>
+		
+			<pre>[{"id":"f88ee9bf86931b19","type":"group","z":"68d54b1d6b382a77","name":"WDX Example - Data - Monitor Value","style":{"label":true},"nodes":["1983f2e6989df38a","d8751b5f06164815","a802c4b85126d417","6e5fba5568bdcdcd","270c26938cba17c2","08d527c1b15fec9a","baf33fb48f36b23a","b8931454a9a799a3","c1ebf9c07290cd72","3109e6742a903269","f9bda9f8741349ed"],"x":34,"y":1219,"w":1392,"h":362},{"id":"1983f2e6989df38a","type":"inject","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX - Data - Subscribe Request","props":[{"p":"path","v":"Virtual.virtual-store.test","vt":"str"},{"p":"subscribe","v":"true","vt":"bool"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":210,"y":1300,"wires":[["f9bda9f8741349ed"]]},{"id":"d8751b5f06164815","type":"debug","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"Success","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1060,"y":1300,"wires":[]},{"id":"a802c4b85126d417","type":"debug","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"Error","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1050,"y":1420,"wires":[]},{"id":"6e5fba5568bdcdcd","type":"comment","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX Example - Data - Monitor Value Subscribe","info":"# WDX Example - Data - Monitor Value Subscribe","x":240,"y":1260,"wires":[]},{"id":"270c26938cba17c2","type":"comment","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX Example - Data - Monitor Value Unsubscribe","info":"# WDX Example - Data - Monitor Value Unsubscribe","x":250,"y":1480,"wires":[]},{"id":"08d527c1b15fec9a","type":"inject","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX - Data - Subscribe Request","props":[{"p":"path","v":"Virtual.virtual-store.test","vt":"str"},{"p":"subscribe","v":"false","vt":"bool"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":210,"y":1520,"wires":[["f9bda9f8741349ed"]]},{"id":"baf33fb48f36b23a","type":"debug","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"Complete","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1060,"y":1540,"wires":[]},{"id":"b8931454a9a799a3","type":"comment","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX Example - Data  - Value Changes Done Message","info":"# WDX Example - Data  - Value Changes Done Message","x":1200,"y":1500,"wires":[]},{"id":"c1ebf9c07290cd72","type":"comment","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX Example - Data  - Value Changes Error Message","info":"#WDX Example - Data  - Value Changes Error Message","x":1200,"y":1380,"wires":[]},{"id":"3109e6742a903269","type":"comment","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"WDX Example - Data  - Value Changes Message","info":"#WDX Example - Data  - Value Changes  Message","x":1180,"y":1260,"wires":[]},{"id":"f9bda9f8741349ed","type":"wago.wdx.data.monitor-value","z":"68d54b1d6b382a77","g":"f88ee9bf86931b19","name":"","client":"3949037aa7f8a94a","path":"","subscribe":false,"x":680,"y":1420,"wires":[["d8751b5f06164815"],["a802c4b85126d417"],["baf33fb48f36b23a"]]},{"id":"3949037aa7f8a94a","type":"wago.wdx.web-socket","url":"ws://localhost:82"}]</pre>
+		
+		</li>
+	</ul>
+
+	<h3>Error Handling</h3>
+
+	<dl class="message-properties">
+		<dt>401</dt>
+		<dd>Wrong request</dd>
+		<dt>401</dt>
+		<dd>Unauthorized</dd>
+		<dt>404</dt>
+		<dd>Not Found</dd>
+		<dt>500</dt>
+		<dd>Unexpected server error</dd>
+	</dl>
+
+	<h3>Additional Resources</h3>
+
+	<ul>
+		<li><b>Github:</b> <a href="https://github.com/elrest-cz/node-red-wdx-data">https://github.com/elrest-cz/node-red-wdx-data</a></li>
+		<li><b>NPMJS:</b> <a href="https://www.npmjs.com/package/@wago/node-red-wdx-data">https://www.npmjs.com/package/@wago/node-red-wdx-data</a></li>
+		<li><b>Support:</b> info@elrest.cz</li>
+	</ul>
+
+	<h3>Licence</h3>
+
+	<ul>
+		<li><b>Licence:</b> MIT</li>
+		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
+	</ul>
 </script>
 
 <script type="text/html" data-template-name="wago.wdx.data.monitor-schema">
@@ -750,7 +1214,97 @@
 </script>
 
 <script type="text/html" data-help-name="wago.wdx.data.monitor-schema">
+	<img src="icons/@wago/node-red-wdx-data/WagoLogo.svg" />
+
 	<h2>WAGO - WDX - Data - Monitor Schema</h2>
-	<p>Subscribe/Unsubscribe to WDX data value</p>
-	<h2>Parameters</h2>
+
+	<h3>Overview</h3>
+
+	<p>
+		<b>Node Name:</b> WDX - Data - Monitor Schema <br />
+		<b>Description:</b> Retrieves the schema from the WDX - Data on given path for given level of the schema.
+	</p>
+
+	<h3>Installation</h3>
+	<p>
+	<pre>npm install @wago/node-red-wdx-data</pre>
+	</p>
+
+
+	<h3>Inputs</h3>
+
+	<dl class="message-properties">
+		<dt>subscribe<span class="property-type">boolean</span></dt>
+		<dd>WDX - Data - Schema - Monitor Schema Subscribe/Unsubscribe</dd>
+	</dl>
+
+	<h3>Configuration Options</h3>
+
+	<ul>
+		<li>
+			<b>Properties:</b>		
+			<dl class="message-properties">
+				<dt>client<span class="property-type">wago.wdx.web-socket</span></dt>
+				<dd>WAGO - WDX - Web Socket Client</dd>
+				<dt>subscribe<span class="property-type">boolean</span></dt>
+				<dd>WDX - Data - Schema - Monitor Schema Subscribe/Unsubscribe</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<h3>Outputs</h3>
+
+	<ul>
+		<li><b>Update:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Complete:</b> Success response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Model.Data.DataSchema.md">WDX - Data Schema model</a>.</li>
+		<li><b>Error:</b> Error response for this node. Output is flow message with payload of <a href="https://github.com/elrest-cz/wdx-schema/blob/master/docs/classes/WDX.Schema.Message.MessageError.md">WDX - Schema -  Message - Error Message</a>.</li>
+	</ul>
+
+	<h3>Usage Examples</h3>
+
+	<ul>
+		<li>
+			<b>Example WDX - DATA - Get schema node flow</b>
+			<p>
+				 Will retrieve root schema from WDX - Data to 2 level of the childrens.
+			</p>
+		
+			<h4><b>Example Figure.</b></h4>
+		
+			<img src="icons/@wago/node-red-wdx-data/wdx-data-monitor-schema.png" />
+		
+			<h4><b>Example flow code.</b></h4>
+		
+			<pre>[{"id":"c91d12bc9a2278da","type":"group","z":"68d54b1d6b382a77","name":"WDX Example - Data  - Schema Monitor","style":{"label":true},"nodes":["6aa031323270d907","37b2ada595dcd942","90395eabaaa89d10","a42c0f0ade7b924b","9215de98b0382cd6","fdc09c297a35b2db","507e4a1ce1fabfaf","1a4d956d27eaf7f5","82bf14f8d45731a4","c4966ead96a14b75","6af56d72537f01a1"],"x":34,"y":179,"w":1372,"h":362},{"id":"6aa031323270d907","type":"comment","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data  - Schema Monitor Subscribe ","info":"# WDX Example - Data  - Subscribe Schemaa","x":250,"y":220,"wires":[]},{"id":"37b2ada595dcd942","type":"inject","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data Subscribe Schema Request","props":[{"p":"subscribe","v":"true","vt":"bool"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":260,"y":260,"wires":[["6af56d72537f01a1"]]},{"id":"90395eabaaa89d10","type":"debug","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"Success","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":1060,"y":260,"wires":[]},{"id":"a42c0f0ade7b924b","type":"debug","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"Error","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1050,"y":380,"wires":[]},{"id":"9215de98b0382cd6","type":"comment","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data  - Schema Monitor Unsubscribe ","info":"# WDX Example - Data  - Schema Monitor Unsubscribe ","x":250,"y":460,"wires":[]},{"id":"fdc09c297a35b2db","type":"inject","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data Unsubscribe Schema Request","props":[{"p":"subscribe","v":"false","vt":"bool"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"","x":270,"y":500,"wires":[["6af56d72537f01a1"]]},{"id":"507e4a1ce1fabfaf","type":"debug","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"Complete","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1060,"y":500,"wires":[]},{"id":"1a4d956d27eaf7f5","type":"comment","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data - MOnitor Schema Message","info":"# WDX Example - Data - MOnitor Schema Message","x":1190,"y":220,"wires":[]},{"id":"82bf14f8d45731a4","type":"comment","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data Subscribe Schema","info":"# WDX Example - Data Subscribe Schema","x":1160,"y":340,"wires":[]},{"id":"c4966ead96a14b75","type":"comment","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"WDX Example - Data Subscribe Schema","info":"# WDX Example - Data Subscribe Schema","x":1160,"y":460,"wires":[]},{"id":"6af56d72537f01a1","type":"wago.wdx.data.monitor-schema","z":"68d54b1d6b382a77","g":"c91d12bc9a2278da","name":"","client":"3949037aa7f8a94a","subscribe":false,"path":"","x":670,"y":380,"wires":[["90395eabaaa89d10"],["a42c0f0ade7b924b"],["507e4a1ce1fabfaf"]]},{"id":"3949037aa7f8a94a","type":"wago.wdx.web-socket","url":"ws://localhost:82"}]</pre>
+		
+		</li>
+	</ul>
+
+	<h3>Error Handling</h3>
+
+	<dl class="message-properties">
+		<dt>401</dt>
+		<dd>Wrong request</dd>
+		<dt>401</dt>
+		<dd>Unauthorized</dd>
+		<dt>404</dt>
+		<dd>Not Found</dd>
+		<dt>500</dt>
+		<dd>Unexpected server error</dd>
+	</dl>
+
+	<h3>Additional Resources</h3>
+
+	<ul>
+		<li><b>Github:</b> <a href="https://github.com/elrest-cz/node-red-wdx-data">https://github.com/elrest-cz/node-red-wdx-data</a></li>
+		<li><b>NPMJS:</b> <a href="https://www.npmjs.com/package/@wago/node-red-wdx-data">https://www.npmjs.com/package/@wago/node-red-wdx-data</a></li>
+		<li><b>Support:</b> info@elrest.cz</li>
+	</ul>
+
+	<h3>Licence</h3>
+
+	<ul>
+		<li><b>Licence:</b> MIT</li>
+		<li><b>Copyright</b> (c) 2024 Elrest Automations Systeme GMBH</li>
+	</ul>
 </script>
